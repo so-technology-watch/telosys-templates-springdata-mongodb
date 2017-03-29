@@ -1,0 +1,36 @@
+
+package ${target.javaPackageFromFolder($TEST_SRC)};
+
+import org.demo.persistence.${entity.name}Persistence ;
+import org.demo.persistence.${entity.name}PersistenceGenericTest;
+import org.junit.Test;
+import org.demo.persistence.impl.springMongo.commons.MongoUtil;
+import org.junit.BeforeClass;
+import java.util.logging.*;
+
+/**
+ * JUnit tests for Car persistence service
+ * 
+ * @author Telosys Tools
+ *
+ */
+public class ${entity.name}PersistenceSpringMongoTest extends ${entity.name}PersistenceGenericTest {
+	private static final Logger LOGGER = Logger.getLogger(${entity.name}PersistenceSpringMongoTest.class.getName());
+
+	@BeforeClass
+	public static void startMongoServer() {
+		try {
+			MongoUtil.init();
+		} catch (Exception e) {
+			LOGGER.info("error start server");
+		}
+	}
+
+	@Test
+	public void testPersistenceService() throws Exception {
+    	${entity.name}Persistence persistenceService = new ${entity.name}PersistenceSpringMongo();
+    	testPersistenceService(persistenceService);
+	}
+
+}
+
